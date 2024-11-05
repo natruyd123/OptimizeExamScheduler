@@ -4,11 +4,16 @@
             <span class="datasetStatus-header">Instructor</span>
 
             <div class="dropdown-container">
-                <input type="text" name="instructor" placeholder="Instructor" class="dropdown-input">
+                <input type="text" name="instructor" placeholder="Faculty Name" class="dropdown-input">
                 <span class="dropdown-icon"><img src="../static/images/arrow-down.svg" alt=""></span>
             </div>
             <div class="dropdown-container">
-                <input type="text" name="facultyStatus" placeholder="Faculty Status" class="dropdown-input">
+                <!-- <input type="text" name="facultyStatus" placeholder="Faculty Designation" class="dropdown-input"> -->
+                <select name="facultyDesignation" class="dropdown-select">
+                    <option value="" disabled selected>Faculty Designation</option>
+                    <option value="instructor">Instructor</option>
+                    <option value="dean">Dean</option>
+                </select>
                 <span class="dropdown-icon"><img src="../static/images/arrow-down.svg" alt=""></span>
             </div>
 
@@ -21,7 +26,14 @@
                 <span class="dropdown-icon"><img src="../static/images/arrow-down.svg" alt=""></span>
             </div>
             <div class="dropdown-container">
-                <input type="text" name="year" placeholder="Year" class="dropdown-input">
+                <!-- <input type="text" name="year" placeholder="Year" class="dropdown-input"> -->
+                <select name="year" class="dropdown-select">
+                    <option value="" disabled selected>Year</option>
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                </select>
                 <span class="dropdown-icon"><img src="../static/images/arrow-down.svg" alt=""></span>
             </div>
 
@@ -38,7 +50,13 @@
                 <span class="dropdown-icon"><img src="../static/images/arrow-down.svg" alt=""></span>
             </div>
             <div class="dropdown-container">
-                <input type="text" name="examType" placeholder="Exam Type" class="dropdown-input">
+                <!-- <input type="text" name="examType" placeholder="Exam Type" class="dropdown-input"> -->
+                <select name="examType" class="dropdown-select">
+                    <option value="" disabled selected>Exam Type</option>
+                    <option value="written">Written</option>
+                    <option value="laboratory">Laboratory</option>
+                    <option value="performance">Performance</option>
+                </select>
                 <span class="dropdown-icon"><img src="../static/images/arrow-down.svg" alt=""></span>
             </div>
         </div>
@@ -46,8 +64,8 @@
         <div class="classSize">
             <span class="datasetStatus-header">Class Size</span>
             <div class="dropdown-container">
-                <input type="text" name="classSize" placeholder="Class Size" class="dropdown-input">
-                <span class="dropdown-icon"><img src="../static/images/arrow-down.svg" alt=""></span>
+                <input type="number" name="classSize" placeholder="Class Size" class="dropdown-input no-icon-right">
+                <!-- <span class="dropdown-icon"><img src="../static/images/arrow-down.svg" alt=""></span> -->
             </div>
         </div>
 

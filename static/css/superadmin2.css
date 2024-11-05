@@ -59,7 +59,8 @@
 }
 
 .header button,
-.addNewUserBtn {
+.addNewUserBtn,
+.filter-action {
     background-color: #2B8700;
     color: white;
     font-size: 12px;
@@ -69,7 +70,8 @@
 .generateScheduleBtn:hover,
 .addBtn:hover,
 .room-addBtn:hover,
-.addNewUserBtn:hover {
+.addNewUserBtn:hover,
+.filter-action:hover {
     background-color: #1F6100;
     color: white;
 }
@@ -325,7 +327,7 @@ button {
 .table-responsive {
     width: 100%;
     overflow-x: auto;
-    max-height: calc(100vh - 29rem);
+    height: 70vh;
     overflow-y: auto;
 }
 
@@ -338,7 +340,7 @@ button {
 .table th,
 .table td {
     border: 1px solid #C0C0C2;
-    padding: 2px;
+    padding: 5px 0px;
     text-align: center;
     vertical-align: middle;
     width: 14.28%;

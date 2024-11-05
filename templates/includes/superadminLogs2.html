@@ -1,35 +1,35 @@
 <div class="container-fluid my-1 p-3 rounded dashBorad-container">
     <div class="d-flex justify-content-between align-items-center mb-3">
-        <h2 class="text-start fs-3 fw-bolder">User Logs</h2>
+        <h2 class="text-start fs-5 fw-bolder">User Logs</h2>
         
         <div id="rigth-side">
-            <div class="search-bar">
+            <!-- <div class="search-bar">
                 <input type="text" id="searchInput" placeholder="Search...">
-                <button onclick="performSearch()" id="searchbtn">
+                <button id="searchbtn">
                     <img src="../static/images/search icon.svg" alt="">
+                </button>
+            </div> -->
+            <div class="filter">
+                <button class="btn filter-action dropdown-toggle" type="button" id="filterDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+                    Filter Actions
                 </button>
                 <div class="dropdown">
                     <ul class="dropdown-menu" aria-labelledby="filterDropdown">
                         <li><input class="dropdown-item" type="submit" form="filterForm" name="action" value="All"></li>
-                        <li><input class="dropdown-item" type="submit" form="filterForm" name="action" value="logged in"></li>
-                        <li><input class="dropdown-item" type="submit" form="filterForm" name="action" value="registered"></li>
-                        <li><input class="dropdown-item" type="submit" form="filterForm" name="action" value="updated"></li>
-                        <li><input class="dropdown-item" type="submit" form="filterForm" name="action" value="deleted"></li>
-                        <li><input class="dropdown-item" type="submit" form="filterForm" name="action" value="exam generated"></li>
-                        <li><input class="dropdown-item" type="submit" form="filterForm" name="action" value="logged out"></li>
+                        <li><input class="dropdown-item" type="submit" form="filterForm" name="action" value="Logged In"></li>
+                        <li><input class="dropdown-item" type="submit" form="filterForm" name="action" value="Registered"></li>
+                        <li><input class="dropdown-item" type="submit" form="filterForm" name="action" value="Updated"></li>
+                        <li><input class="dropdown-item" type="submit" form="filterForm" name="action" value="Deleted"></li>
+                        <li><input class="dropdown-item" type="submit" form="filterForm" name="action" value="Exam Generated"></li>
+                        <li><input class="dropdown-item" type="submit" form="filterForm" name="action" value="Logged Out"></li>
                     </ul>
                 </div>
-                <button class="btn btn-success dropdown-toggle fw-bold me-3 ms-3" type="button" id="filterDropdown" data-bs-toggle="dropdown" aria-expanded="false">
-                    Filter Actions
-                </button>
             </div>
         </div>
-       
-       
     </div>
     
     <div class="table-responsive">
-        <form id="filterForm" method="POST" action="/filter_logs">
+        <form id="filterForm" method="POST"action="#">
             <input type="hidden" name="filter" value="true">
         </form>
         
@@ -53,6 +53,6 @@
                 {% endfor %}
             </tbody>
         </table>
-    
     </div>
 </div>
+

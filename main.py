@@ -49,7 +49,7 @@ def login():
     # If the user is already logged in, redirect them to their dashboard
     if 'username' in session:
         if session['role'] == 1:
-            return redirect(url_for('superadmin'))
+            return redirect(url_for('superadmin2'))
         elif session['role'] == 2:
             return redirect(url_for('admin'))
         elif session['role'] == 3:
@@ -142,13 +142,14 @@ def register():
                 logger.info(f"User '{username}' registered successfully.")
             
                 flash("Register inserted successfully.")
-                return redirect(url_for('supadregister'))
+                return redirect(url_for('superadmin'))
             except mysql.connector.Error as err:
                 error = f"Database error: {err}"
             finally:
                 cursor.close()
 
-    return render_template('supadregister.html', error=error, session=session)
+    # return render_template('supe.html', error=error, session=session)
+    return redirect(url_for('superadmin', error=error, session=session))
 
 
 
@@ -214,57 +215,107 @@ def list_users():
 
     return render_template('users.html', users=users, username=username, session=session)
 
-# CRUD: Edit user
-@app.route('/edit_user/<int:user_id>', methods=['GET', 'POST'])
+@app.route('/edit_user/<int:user_id>', methods=['POST'])
 def edit_user(user_id):
-    if 'username' not in session:
+    if 'username' in session and session['role'] == 1:
+        username = session['username']
+    else:
         return redirect(url_for('login'))
+    
+    # Extract form data
+    new_username = request.form['username']
+    new_email = request.form['email']
+    new_first_name = request.form['firstName']
+    new_last_name = request.form['lastName']
+    new_role = request.form['role']
 
-    cursor = mysql.cursor(dictionary=True)
-    if request.method == 'POST':
-        username = request.form['username']
-        email = request.form['email']
-        firstName = request.form['firstName']
-        lastName = request.form['lastName']
-        role = request.form['role']
-
-        cursor.execute('UPDATE user SET Username = %s, Email = %s, firstName = %s, lastName = %s, RoleID = %s, UpdatedAt = CURRENT_TIMESTAMP WHERE UserID = %s',
-                       (username, email, firstName, lastName, role, user_id))
+    try:
+        cursor = mysql.cursor(dictionary=True)
+        # Update user information in the database
+        cursor.execute("""
+            UPDATE users 
+            SET Username = %s, Email = %s, firstName = %s, lastName = %s, RoleID = %s 
+            WHERE UserID = %s
+        """, (new_username, new_email, new_first_name, new_last_name, new_role, user_id))
         mysql.commit()
-
-        # Log successful edited the userlist
-        log_event(session['UserID'], 'updated', f"user with ID {user_id}")
-        logger.info(f"User '{username}'  successfully.")
-
-
         cursor.close()
-        return redirect(url_for('list_users'))
+        flash('User updated successfully', 'success')
+    except Exception as e:
+        flash(f'Error updating user: {str(e)}', 'danger')
+    
+    return redirect(url_for('users_management'))
 
-    cursor.execute('SELECT * FROM user WHERE UserID = %s', (user_id,))
-    user = cursor.fetchone()
-    cursor.close()
-
-    return render_template('edit_user.html', user=user, session=session)
-
-# CRUD: Delete user
 @app.route('/delete_user/<int:user_id>', methods=['POST'])
 def delete_user(user_id):
-    if 'username' not in session:
+    if 'username' in session and session['role'] == 1:
+        username = session['username']
+    else:
         return redirect(url_for('login'))
 
-    cursor = mysql.cursor(dictionary=True)
-    cursor.execute('SELECT Username FROM user WHERE UserID = %s', (user_id,))
-    user = cursor.fetchone()
+    try:
+        cursor = mysql.cursor(dictionary=True)
+        # Delete user from the database
+        cursor.execute("DELETE FROM users WHERE UserID = %s", (user_id,))
+        mysql.commit()
+        cursor.close()
+        flash('User deleted successfully', 'success')
+    except Exception as e:
+        flash(f'Error deleting user: {str(e)}', 'danger')
 
-    # Log successful deletion
-    log_event(session['UserID'], 'Deleted', f"user with ID {user_id}")
-    logger.info(f"User '{'Username'}' successfully deleted.")
+    return redirect(url_for('users_management'))
 
-    cursor.execute('DELETE FROM user WHERE UserID = %s', (user_id,))
-    mysql.commit()
-    cursor.close()
+
+# # CRUD: Edit user
+# @app.route('/edit_user/<int:user_id>', methods=['GET', 'POST'])
+# def edit_user(user_id):
+#     if 'username' not in session:
+#         return redirect(url_for('login'))
+
+#     cursor = mysql.cursor(dictionary=True)
+#     if request.method == 'POST':
+#         username = request.form['username']
+#         email = request.form['email']
+#         firstName = request.form['firstName']
+#         lastName = request.form['lastName']
+#         role = request.form['role']
+
+#         cursor.execute('UPDATE user SET Username = %s, Email = %s, firstName = %s, lastName = %s, RoleID = %s, UpdatedAt = CURRENT_TIMESTAMP WHERE UserID = %s',
+#                        (username, email, firstName, lastName, role, user_id))
+#         mysql.commit()
+
+#         # Log successful edited the userlist
+#         log_event(session['UserID'], 'updated', f"user with ID {user_id}")
+#         logger.info(f"User '{username}'  successfully.")
+
+
+#         cursor.close()
+#         return redirect(url_for('list_users'))
+
+#     cursor.execute('SELECT * FROM user WHERE UserID = %s', (user_id,))
+#     user = cursor.fetchone()
+#     cursor.close()
+
+#     return render_template('edit_user.html', user=user, session=session)
+
+# # CRUD: Delete user
+# @app.route('/delete_user/<int:user_id>', methods=['POST'])
+# def delete_user(user_id):
+#     if 'username' not in session:
+#         return redirect(url_for('login'))
+
+#     cursor = mysql.cursor(dictionary=True)
+#     cursor.execute('SELECT Username FROM user WHERE UserID = %s', (user_id,))
+#     user = cursor.fetchone()
+
+#     # Log successful deletion
+#     log_event(session['UserID'], 'Deleted', f"user with ID {user_id}")
+#     logger.info(f"User '{'Username'}' successfully deleted.")
+
+#     cursor.execute('DELETE FROM user WHERE UserID = %s', (user_id,))
+#     mysql.commit()
+#     cursor.close()
     
-    return redirect(url_for('list_users'))
+#     return redirect(url_for('list_users'))
 
 
 # CRUD: Delete users log
@@ -321,6 +372,7 @@ def filter_logs():
         cursor.close()
 
     return render_template('supadminlogs.html', users=users, username=username)
+
 
 # logs list
 @app.route('/fecth_logs')
@@ -435,23 +487,31 @@ def index():
     
 # superadmin
 @app.route('/superadmin')
-def superadmin2():
+def superadmin():
     if 'username' in session and session['role'] == 1:
         username = session['username']
         
         cursor = mysql.cursor(dictionary=True)
-        cursor.execute('SELECT * FROM user')  
-        users = cursor.fetchall()
-        cursor.close()
         
-        cursor = mysql.cursor(dictionary=True)
+        # Fetch the email of the logged-in user
+        cursor.execute('SELECT email FROM user WHERE username = %s', (username,))
+        user = cursor.fetchone()
+        email = user['email'] if user else 'No email found'
+        
+        # Fetch users
+        cursor.execute('SELECT * FROM user')
+        users = cursor.fetchall()
+        
+        # Fetch logs
         cursor.execute('SELECT * FROM filtered_logs')
         logs = cursor.fetchall()
+        
         cursor.close()
         
-        return render_template('superadmin2.html', users=users, logs=logs,  username=username)
+        return render_template('superadmin2.html', users=users, logs=logs, username=username, email=email)
     else:
         return redirect(url_for('login'))
+
     
 #for superadmin register
 @app.route('/supadregister')
@@ -487,17 +547,23 @@ def admin():
         username = session['username']
         
         cursor = mysql.cursor(dictionary=True)
-        cursor.execute('SELECT * FROM user')  
-        users = cursor.fetchall()
-        cursor.close()
         
-        cursor = mysql.cursor(dictionary=True)
+        # Fetch the email of the logged-in user
+        cursor.execute('SELECT email FROM user WHERE username = %s', (username,))
+        user = cursor.fetchone()
+        email = user['email'] if user else 'No email found'
+        
+        # Fetch users
+        cursor.execute('SELECT * FROM user')
+        users = cursor.fetchall()
+        
+        # Fetch announcements
         cursor.execute('SELECT * FROM announcements ORDER BY created_at DESC')
         announcements = cursor.fetchall()
+        
         cursor.close()
-
-        return render_template('admin.html', users=users, username=username, session=session, announcements=announcements)
-        # return render_template('admin.html', username=username)
+        
+        return render_template('admin.html', users=users, username=username, email=email, session=session, announcements=announcements)
     else:
         return redirect(url_for('login'))
 
@@ -508,20 +574,26 @@ def faculty():
         username = session['username']
 
         cursor = mysql.cursor(dictionary=True)
+        
+        # Fetch the email of the logged-in user
+        cursor.execute('SELECT email FROM user WHERE username = %s', (username,))
+        user = cursor.fetchone()
+        email = user['email'] if user else 'No email found'
+        
+        # Fetch specific user details (for demo, filtering on a specific UserId)
         cursor.execute('SELECT UserID, Username, Email, firstName, lastName FROM user WHERE UserId = 68')  
         users = cursor.fetchall()
-        cursor.close()
         
-        cursor = mysql.cursor(dictionary=True)
+        # Fetch announcements
         cursor.execute('SELECT * FROM announcements ORDER BY created_at DESC')
         announcements = cursor.fetchall()
+        
         cursor.close()
 
-        return render_template('faculty.html', users=users, username=username, session=session, announcements=announcements)
-        # return render_template('admin.html', username=username)
-
+        return render_template('faculty.html', users=users, username=username, email=email, session=session, announcements=announcements)
     else:
         return redirect(url_for('login'))
+
 
 # Logout route
 @app.route('/logout')

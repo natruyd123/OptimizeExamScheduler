@@ -1,27 +1,27 @@
-Section,CourseCode,ClassSize,Instructor,RoomForExam,RoomSize,StartDate,EndDate
-BSDRM 2-A,P222,44,"Acdal, April M.",AB R-1,50,"March 1, 2024","March 5, 2024"
-BSDRM 2-B,P222,43,"Acdal, April M.",AB R-2,50,,
-BSDRM 2-D,P222,43,"Acdal, April M.",AB R-3,50,,
-BSDRM 2-G,P222,43,"Acdal, April M.",AB R-4,50,,
-BSDRM 3-B,ER327,37,"Acdal, April M.",AB R-5,50,,
-BSDRM 3-B,RR325,43,"Acdal, April M.",AB R-6,50,,
-BSDRM 3-C,RR325,43,"Acdal, April M.",AB R-7,60,,
-BSDRM 3-D,ER327,42,"Acdal, April M.",AB R-8,60,,
-BSDRM 3-D,RR325,37,"Acdal, April M.",AB R-9,60,,
-BSDRMSP 2-2022,P222,31,"Acdal, April M.",AB R-10,60,,
-MAEM 1-A,FC703,4,"Anunuevo, Ailene",,,,
-BTLEd 2-A,EDUC 222B,38,"Balio, Ariel, Jr. C.",,,,
-BTLEd 3-B,THE326,35,"Balio, Ariel, Jr. C.",,,,
-BTLEd 3-C,THE326,37,"Balio, Ariel, Jr. C.",,,,
-BTLEd 4-B,EDUC 400B,31,"Balio, Ariel, Jr. C.",,,,
-BTLEd 4-C,EDUC 500,31,"Balio, Ariel, Jr. C.",,,,
-BTLEd 4-C,EDUC 400B,31,"Balio, Ariel, Jr. C.",,,,
-BSFT 2-A,FT 222,32,"Basilisco, Arcelyn A.",,,,
-BSFT 2-B,FT 222,41,"Basilisco, Arcelyn A.",,,,
-MSMBIO 1-A,MB 604,3,"Bos, Arthur R.",,,,
-BSIT 1-B,IT Elec1,40,"Casipe, Analyn V.",,,,
-BSIT 2-E,IT 221 D,41,"Casipe, Analyn V.",,,,
-BSIT 2-F,IT 221 D,39,"Casipe, Analyn V.",,,,
-BSIT 2-G,IT 221 D,40,"Casipe, Analyn V.",,,,
-BSIT 2-H,IT 221 D,39,"Casipe, Analyn V.",,,,
-BSIT 3-D,IT 323,35,"Casipe, Analyn V.",,,,
+Section,ClassSize,CourseCode,TypeOfExam,Instructor,InstructorDesignation,RoomForExam,RoomSize
+BSDRM 2-A,44,P222,,"Acdal, April M.",,AB R-1,50
+BSDRM 2-B,43,P222,,"Acdal, April M.",,AB R-2,50
+BSDRM 2-D,43,P222,,"Acdal, April M.",,AB R-3,50
+BSDRM 2-G,43,P222,,"Acdal, April M.",,AB R-4,50
+BSDRM 3-B,37,ER327,,"Acdal, April M.",,AB R-5,50
+BSDRM 3-B,43,RR325,,"Acdal, April M.",,AB R-6,50
+BSDRM 3-C,43,RR325,,"Acdal, April M.",,AB R-7,60
+BSDRM 3-D,42,ER327,,"Acdal, April M.",,AB R-8,60
+BSDRM 3-D,37,RR325,,"Acdal, April M.",,AB R-9,60
+BSDRMSP 2-2022,31,P222,,"Acdal, April M.",,AB R-10,60
+MAEM 1-A,4,FC703,,"Anunuevo, Ailene",,,
+BTLEd 2-A,38,EDUC 222B,,"Balio, Ariel, Jr. C.",,,
+BTLEd 3-B,35,THE326,,"Balio, Ariel, Jr. C.",,,
+BTLEd 3-C,37,THE326,,"Balio, Ariel, Jr. C.",,,
+BTLEd 4-B,31,EDUC 400B,,"Balio, Ariel, Jr. C.",,,
+BTLEd 4-C,31,EDUC 500,,"Balio, Ariel, Jr. C.",,,
+BTLEd 4-C,31,EDUC 400B,,"Balio, Ariel, Jr. C.",,,
+BSFT 2-A,32,FT 222,,"Basilisco, Arcelyn A.",,,
+BSFT 2-B,41,FT 222,,"Basilisco, Arcelyn A.",,,
+MSMBIO 1-A,3,MB 604,,"Bos, Arthur R.",,,
+BSIT 1-B,40,IT Elec1,,"Casipe, Analyn V.",,,
+BSIT 2-E,41,IT 221 D,,"Casipe, Analyn V.",,,
+BSIT 2-F,39,IT 221 D,,"Casipe, Analyn V.",,,
+BSIT 2-G,40,IT 221 D,,"Casipe, Analyn V.",,,
+BSIT 2-H,39,IT 221 D,,"Casipe, Analyn V.",,,
+BSIT 3-D,35,IT 323,,"Casipe, Analyn V.",,,

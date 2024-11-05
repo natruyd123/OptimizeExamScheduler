@@ -1,7 +1,7 @@
 
 .admin-container {
     display: flex;
-    min-height: 100vh;
+    min-height: 95vh;
 }
 
 .admin-sidebar {
@@ -124,6 +124,28 @@
 .dropdown-container {
     position: relative;
     display: inline-block;
+}
+
+.dropdown-select {
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    width: 178px;
+    padding: 5px;
+    padding-right: 30px;
+    /* Space for the icon */
+    font-size: 12px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 10px;
+}
+
+.dropdown-container .dropdown-icon {
+    position: absolute;
+    top: 50%;
+    right: 10px;
+    transform: translateY(-50%);
+    pointer-events: none;
 }
 
 .dropdown-input {
@@ -326,6 +348,7 @@ button {
     width: 100%;
     overflow-x: auto;
     max-height: calc(100vh - 29rem);
+    /* max-height: 40vh; */
     overflow-y: auto;
 }
 
@@ -341,7 +364,7 @@ button {
     padding: 2px;
     text-align: center;
     vertical-align: middle;
-    width: 14.28%;
+    width: 10%;
 }
 
 .table thead th {

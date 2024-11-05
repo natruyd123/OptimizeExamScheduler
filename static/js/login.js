@@ -5,6 +5,8 @@ document.getElementById('google-account-btn').addEventListener('click', function
 document.addEventListener('DOMContentLoaded', function () {
     const usernameInput = document.getElementById('username');
     const passwordInput = document.getElementById('password');
+    const toggleButton = document.getElementById('togglePassword');
+    const toggleIcon = document.getElementById('toggleIcon');
 
     // Function to add typing class to input field
     function addTypingClass(inputElement) {
@@ -34,5 +36,13 @@ document.addEventListener('DOMContentLoaded', function () {
     // Event listener for blur event (when input field loses focus) on password input field
     passwordInput.addEventListener('blur', () => {
         removeTypingClass(passwordInput);
+    });
+
+    // Toggle password visibility
+    toggleButton.addEventListener('click', function () {
+        const type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
+        passwordInput.setAttribute('type', type);
+        const icon = type === 'password' ? 'eye-close.svg' : 'eye-open.svg';
+        toggleIcon.setAttribute('src', `/static/images/${icon}`);
     });
 });
